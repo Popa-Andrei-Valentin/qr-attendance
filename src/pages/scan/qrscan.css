@@ -1,0 +1,12 @@
+.scanner-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.scanner-container {
+  width: 100%;
+  max-width: 700px;
+}
