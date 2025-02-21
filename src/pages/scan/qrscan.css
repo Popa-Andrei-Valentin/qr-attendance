@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  max-height: 100vh;
 }
 
 h1 {
@@ -17,6 +18,17 @@ h1 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.checkedin-list {
+  padding-top: 20px ;
+  font-weight: bold;
+}
+
+.checkedin-list > li > span {
+  color: #02d202;
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 #html5qr-code-full-region {
