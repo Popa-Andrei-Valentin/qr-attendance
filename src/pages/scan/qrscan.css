@@ -55,6 +55,14 @@ h1 {
   font-weight: bold;
 }
 
+#html5-qrcode-button-camera-permission {
+  border: none !important;
+  background: cornflowerblue !important;
+  padding: 10px;
+  margin: 10px;
+  font-weight: bold;
+}
+
 #html5-qrcode-button-camera-stop {
   border: none !important;
   background: red !important;

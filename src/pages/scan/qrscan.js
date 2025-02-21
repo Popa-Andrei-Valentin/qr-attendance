@@ -17,7 +17,6 @@ export default function QRScan() {
 				// Check if code is already scanned.
 				// TODO: Show text with code already scanned
 				if (checkedInList.some((obj) => obj.row === row)) return;
-				console.log(checkedInList);
 
 				// Make endpoint request.
 				await axios.post('/api/scan', { row });
