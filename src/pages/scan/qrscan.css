@@ -24,7 +24,7 @@ h1 {
   padding-top: 20px ;
   font-weight: bold;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 
 .checkedin-list > li > span {

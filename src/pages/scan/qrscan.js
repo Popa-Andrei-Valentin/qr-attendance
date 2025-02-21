@@ -22,7 +22,7 @@ export default function QRScan() {
 				await axios.post('/api/scan', { row });
 
 				// Add row to ignore list.
-				setCheckedInList((prevList) => [...prevList, { row, name }]);
+				setCheckedInList((prevList) => [{ row, name }, ...prevList]);
 			} catch (e) {
 				console.error(e);
 			}
