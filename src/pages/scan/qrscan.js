@@ -4,23 +4,24 @@ import Html5QrcodePlugin from "@/components/Html5QrcodeScannerPlugin";
 import axios from "axios";
 
 export default function QRScan() {
-	// Declare ignoreList.
-	const [ignoreList, setIgnoreList] = useState([]);
+	// Declare checkedInList.
+	const [checkedInList, setCheckedInList] = useState([]);
 
 	// Scan QR code and make endpoint request.
 	const onNewScanResult = async (decodedText) => {
-		const { row } = JSON.parse(decodedText);
+		const { row, name } = JSON.parse(decodedText);
 
 		if (row) {
 			try {
 				// Check if code is already scanned.
-				if (ignoreList.includes(row)) return;
+				// TODO: Show text with code already scanned
+				if (checkedInList.includes((obj) => obj.row === row)) return;
 
 				// Make endpoint request.
 				await axios.post('/api/scan', { row });
 
 				// Add row to ignore list.
-				setIgnoreList([...ignoreList, row]);
+				setCheckedInList([...checkedInList, { row, name }]);
 			} catch (e) {
 				console.error(e);
 			}
@@ -36,6 +37,9 @@ export default function QRScan() {
 				disableFlip={false}
 				qrCodeSuccessCallback={onNewScanResult}
 			/>
+			<ul>
+				{ checkedInList.map(({ row, name }) => <li key={row}>{name || "Name not found"}: <span>Checked in</span></li>) }
+			</ul>
 		</div>
 	</div>
 }
