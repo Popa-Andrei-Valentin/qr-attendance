@@ -1,12 +1,18 @@
 import './qrscan.css';
 import '../../app/globals.css'
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Html5QrcodePlugin from "@/components/Html5QrcodeScannerPlugin";
 import axios from "axios";
 
 export default function QRScan() {
 	// Declare checkedInList.
 	const [checkedInList, setCheckedInList] = useState([]);
+	const checkedInListRef = useRef(checkedInList);
+
+	useEffect(() => {
+		/* Use ref to access the latest version of state in the onNewScanResult callback. */
+		checkedInListRef.current = checkedInList;
+	}, [checkedInList]);
 
 	// Scan QR code and make endpoint request.
 	const onNewScanResult = async (decodedText) => {
@@ -15,8 +21,9 @@ export default function QRScan() {
 		if (row) {
 			try {
 				// Check if code is already scanned.
-				// TODO: Show text with code already scanned
-				if (checkedInList.some((obj) => obj.row === row)) return;
+				if (checkedInListRef.current.some((obj) => obj.row === row)) {
+					throw(`Attendee ${name || `with row: ${row}`} QR code was already scanned !`)
+				};
 
 				// Make endpoint request.
 				await axios.post('/api/scan', { row });
