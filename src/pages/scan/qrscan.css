@@ -32,7 +32,7 @@ h1 {
 }
 
 #html5qr-code-full-region {
-  background: #424242;
+  background: #2C303A;
   border: none !important;
   width: 100% !important;
 }
@@ -42,6 +42,7 @@ h1 {
   background: green !important;
   padding: 10px;
   margin: 10px;
+  font-weight: bold;
 }
 
 #html5-qrcode-button-camera-stop {
@@ -49,4 +50,5 @@ h1 {
   background: red !important;
   padding: 10px;
   margin: 10px;
+  font-weight: bold;
 }
