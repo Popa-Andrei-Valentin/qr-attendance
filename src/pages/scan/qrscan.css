@@ -23,6 +23,8 @@ h1 {
 .checkedin-list {
   padding-top: 20px ;
   font-weight: bold;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .checkedin-list > li > span {
@@ -40,6 +42,14 @@ h1 {
 #html5-qrcode-button-camera-start {
   border: none !important;
   background: green !important;
+  padding: 10px;
+  margin: 10px;
+  font-weight: bold;
+}
+
+#html5-qrcode-button-file-selection {
+  border: none !important;
+  background: cornflowerblue !important;
   padding: 10px;
   margin: 10px;
   font-weight: bold;

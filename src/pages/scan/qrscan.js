@@ -16,13 +16,13 @@ export default function QRScan() {
 			try {
 				// Check if code is already scanned.
 				// TODO: Show text with code already scanned
-				if (checkedInList.includes((obj) => obj.row === row)) return;
+				if (checkedInList.some((obj) => obj.row === row)) return;
 
 				// Make endpoint request.
 				await axios.post('/api/scan', { row });
 
 				// Add row to ignore list.
-				setCheckedInList([...checkedInList, { row, name }]);
+				setCheckedInList(prevList => [...prevList, { row, name }]);
 			} catch (e) {
 				console.error(e);
 			}
@@ -39,7 +39,7 @@ export default function QRScan() {
 				qrCodeSuccessCallback={onNewScanResult}
 			/>
 			<ul className='checkedin-list'>
-				{ checkedInList.map(({ row, name }) => <li key={row}>{name || "Name not found"}: <span>Checked in</span></li>) }
+				{ checkedInList.map(({ row, name }) => <li key={row}>{ name || "Name not found" }: <span>Checked in</span></li>) }
 			</ul>
 		</div>
 	</div>
