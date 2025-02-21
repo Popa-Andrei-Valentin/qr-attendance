@@ -1,4 +1,5 @@
 import './qrscan.css';
+import '../../app/globals.css'
 import { useState } from "react";
 import Html5QrcodePlugin from "@/components/Html5QrcodeScannerPlugin";
 import axios from "axios";
