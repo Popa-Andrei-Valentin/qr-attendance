@@ -8,8 +8,23 @@ export default function QRScan() {
 	const [ignoreList, setIgnoreList] = useState([]);
 
 	// Scan QR code and make endpoint request.
-	const onNewScanResult = (decodedText) => {
-		console.log(decodedText);
+	const onNewScanResult = async (decodedText) => {
+		const { row } = JSON.parse(decodedText);
+
+		if (row) {
+			try {
+				// Check if code is already scanned.
+				if (ignoreList.includes(row)) return;
+
+				// Make endpoint request.
+				await axios.post('/api/scan', { row });
+
+				// Add row to ignore list.
+				setIgnoreList([...ignoreList, row]);
+			} catch (e) {
+				console.error(e);
+			}
+		}
 	}
 
 	return <div className='scanner-page'>
