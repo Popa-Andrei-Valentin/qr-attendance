@@ -89,7 +89,8 @@ h1 {
 }
 
 #html5qr-code-full-region__scan_region > video {
-  max-height: 300px !important;
+  max-height: 500px !important;
+  width: 100% !important;
 }
 
 #html5qr-code-full-region__dashboard_section {
