@@ -51,6 +51,7 @@ export default function QRScan() {
 				qrbox={250}
 				disableFlip={false}
 				qrCodeSuccessCallback={onNewScanResult}
+				pause={isLoading}
 			/>
 			<ul className='checkedin-list'>
 				{ checkedInList.map(({ row, name }) => <li key={row}>{ name || "Name not found" }: <span>Checked in</span></li>) }
