@@ -70,3 +70,7 @@ h1 {
   margin: 10px;
   font-weight: bold;
 }
+
+#html5qr-code-full-region__scan_region > video {
+  max-height: 300px !important;
+}
