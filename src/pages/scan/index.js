@@ -1,3 +1,4 @@
+'use client'
 import './qrscan.css';
 import '../../app/globals.css'
 import { useState, useRef, useEffect } from "react";
@@ -8,6 +9,7 @@ export default function QRScan() {
 	// Declare checkedInList.
 	const [checkedInList, setCheckedInList] = useState([]);
 	const checkedInListRef = useRef(checkedInList);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		/* Use ref to access the latest version of state in the onNewScanResult callback. */
@@ -16,25 +18,28 @@ export default function QRScan() {
 
 	// Scan QR code and make endpoint request.
 	const onNewScanResult = async (decodedText) => {
-		const { row, name } = JSON.parse(decodedText);
-
-		if (row) {
 			try {
-				// Check if code is already scanned.
-				if (checkedInListRef.current.some((obj) => obj.row === row)) {
-					throw(`Attendee ${name || `with row: ${row}`} QR code was already scanned !`)
-				};
+				setIsLoading(false);
+				const { row, name } = JSON.parse(decodedText);
 
-				// Make endpoint request.
-				await axios.post('/api/scan', { row });
+				if (row) {
+						// Check if code is already scanned.
+						if (checkedInListRef.current.some((obj) => obj.row === row)) {
+							throw(`Attendee ${name || `with row: ${row}`} QR code was already scanned !`)
+						};
 
-				// Add row to ignore list.
-				setCheckedInList((prevList) => [{ row, name }, ...prevList]);
-			} catch (e) {
-				console.error(e);
-			}
-		}
-	}
+						// Make endpoint request.
+						await axios.post('/api/scan', { row });
+
+						// Add row to ignore list.
+						setCheckedInList((prevList) => [{ row, name }, ...prevList]);
+
+						setIsLoading(false);
+				}
+		} catch (e) {
+			setIsLoading(false);
+			console.error(e);
+	}}
 
 	return <div className='scanner-page'>
 		<h1>Scan</h1>
