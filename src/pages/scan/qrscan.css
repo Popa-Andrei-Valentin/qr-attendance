@@ -33,6 +33,23 @@ h1 {
   overflow-y: auto;
 }
 
+.progress-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  background: rgba(100, 149, 237, 0.2);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.progress-container > .progress-bar {
+  margin-top:10px;
+  width: 100%;
+}
+
 #html5qr-code-full-region {
   background: #2C303A;
   border: none !important;
@@ -73,4 +90,9 @@ h1 {
 
 #html5qr-code-full-region__scan_region > video {
   max-height: 300px !important;
+}
+
+#html5qr-code-full-region__dashboard_section {
+  display: flex;
+  flex-direction: column;
 }

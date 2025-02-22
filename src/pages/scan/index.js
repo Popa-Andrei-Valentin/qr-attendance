@@ -1,9 +1,11 @@
 'use client'
 import './qrscan.css';
 import '../../app/globals.css'
+import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import Html5QrcodePlugin from "@/components/Html5QrcodeScannerPlugin";
-import axios from "axios";
+import Snackbar from '@mui/material/Snackbar';
+import LinearProgress from '@mui/material/LinearProgress';
 
 export default function QRScan() {
 	// Declare checkedInList.
@@ -19,7 +21,7 @@ export default function QRScan() {
 	// Scan QR code and make endpoint request.
 	const onNewScanResult = async (decodedText) => {
 			try {
-				setIsLoading(false);
+				setIsLoading(true);
 				const { row, name } = JSON.parse(decodedText);
 
 				if (row) {
@@ -54,5 +56,17 @@ export default function QRScan() {
 				{ checkedInList.map(({ row, name }) => <li key={row}>{ name || "Name not found" }: <span>Checked in</span></li>) }
 			</ul>
 		</div>
+		<Snackbar
+			anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+			open={isLoading}
+			autoHideDuration={6000}
+			onClose={() => setIsLoading(false)}
+			key={'bottom' + 'center'}
+		>
+			<div className="progress-container">
+				<span>Processing QR data...</span>
+				<LinearProgress className="progress-bar" color="info"/>
+			</div>
+		</Snackbar>
 	</div>
 }
